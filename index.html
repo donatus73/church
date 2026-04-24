@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Word of Hope Evangelical Mission | Modern & Vibrant</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Swiper CSS (modern carousel) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #eef5fc 0%, #dce9f5 100%);
+      color: #1a2c3e;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* subtle grain texture for depth */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(rgba(255,255,240,0.08) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 28px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Navigation */
+    .navbar {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 1rem 0;
+      transition: all 0.3s ease;
+    }
+    .nav-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .logo h2 {
+      font-weight: 700;
+      background: linear-gradient(125deg, #1f6392, #2c7eb6);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.3px;
+    }
+    .logo span {
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: #4b6f8c;
+      display: block;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #1f3b4c;
+      transition: 0.2s;
+      font-size: 1rem;
+    }
+    .nav-links a:hover {
+      color: #2c7eb6;
+      transform: translateY(-2px);
+    }
+
+    /* sections general */
+    section {
+      padding: 5rem 0;
+      border-bottom: 1px solid rgba(128, 164, 188, 0.2);
+    }
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+      color: #144d6b;
+    }
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 0;
+      width: 70px;
+      height: 4px;
+      background: #4791b0;
+      border-radius: 4px;
+    }
+    .title-center {
+      text-align: center;
+    }
+    .title-center:after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* CAROUSEL SWIPER */
+    .hero-swiper {
+      width: 100%;
+      height: 600px;
+      border-radius: 0 0 32px 32px;
+      overflow: hidden;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.2);
+      margin-bottom: 1rem;
+    }
+    .swiper-slide {
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .slide-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(18, 52, 77, 0.65), rgba(30, 75, 105, 0.55));
+      z-index: 1;
+    }
+    .slide-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: white;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 0 1.5rem;
+    }
+    .slide-content h2 {
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    .slide-content p {
+      font-size: 1.2rem;
+      max-width: 680px;
+      margin: 0 auto 1.8rem;
+    }
+    .btn-light {
+      background: white;
+      color: #1a4c6e;
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.25s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .btn-light:hover {
+      background: #f0f9ff;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 18px -8px rgba(0,0,0,0.2);
+    }
+    .swiper-button-next, .swiper-button-prev {
+      color: white;
+      background: rgba(0,0,0,0.3);
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+    }
+    .swiper-pagination-bullet-active {
+      background: #92c9e6;
+    }
+
+    /* cards grid (ministries) */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+    .ministry-card {
+      background: white;
+      border-radius: 28px;
+      padding: 1.8rem 1.5rem;
+      text-align: center;
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      box-shadow: 0 12px 28px -10px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(146, 187, 208, 0.3);
+    }
+    .ministry-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 24px 36px -14px rgba(41, 112, 120, 0.2);
+    }
+    .card-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 20px;
+      margin-bottom: 1.2rem;
+      background: #d5e7f0;
+    }
+    .ministry-card h3 {
+      font-size: 1.5rem;
+      margin: 1rem 0 0.5rem;
+      color: #1c5a7a;
+    }
+
+    /* About & Welcome */
+    .about-flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      align-items: center;
+      margin-top: 2rem;
+    }
+    .about-text {
+      flex: 1;
+    }
+    .about-img {
+      flex: 1;
+      border-radius: 2rem;
+      overflow: hidden;
+      box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
+    }
+    .about-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.4s;
+    }
+    .about-img:hover img {
+      transform: scale(1.02);
+    }
+
+    /* contact section */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      margin-top: 2rem;
+    }
+    .contact-info {
+      background: rgba(255,255,245,0.6);
+      backdrop-filter: blur(4px);
+      border-radius: 2rem;
+      padding: 2rem;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+    }
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.8rem;
+    }
+    .info-item i {
+      font-size: 1.5rem;
+      width: 48px;
+      height: 48px;
+      background: #eef4fc;
+      border-radius: 60px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #276b93;
+    }
+    .contact-form {
+      background: white;
+      padding: 2rem;
+      border-radius: 2rem;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+    }
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 1rem;
+      border: 1px solid #cde0ea;
+      border-radius: 1.2rem;
+      font-family: inherit;
+      font-size: 0.95rem;
+      transition: 0.2s;
+      background: #fefefe;
+    }
+    .form-group input:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: #4791b0;
+      box-shadow: 0 0 0 3px rgba(71, 145, 176, 0.2);
+    }
+    .btn-submit {
+      background: #1f6392;
+      color: white;
+      border: none;
+      padding: 0.9rem 1.8rem;
+      font-weight: 600;
+      border-radius: 3rem;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: 0.2s;
+      width: 100%;
+    }
+    .btn-submit:hover {
+      background: #0f4b6e;
+      transform: scale(0.98);
+    }
+    .form-message {
+      margin-top: 1rem;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    /* footer */
+    footer {
+      background: #05242f;
+      color: #bdd9e8;
+      padding: 2rem 0;
+      text-align: center;
+    }
+    .social-icons a {
+      color: #c2e2f5;
+      margin: 0 12px;
+      font-size: 1.4rem;
+      transition: 0.2s;
+      display: inline-block;
+    }
+    .social-icons a:hover {
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    /* animations on scroll (fade-up) */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* responsive */
+    @media (max-width: 900px) {
+      .hero-swiper { height: 480px; }
+      .slide-content h2 { font-size: 2rem; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .nav-flex { flex-direction: column; gap: 1rem; }
+      .nav-links { gap: 1.3rem; justify-content: center; flex-wrap: wrap; }
+      .section-title { font-size: 1.8rem; }
+      .container { padding: 0 20px; }
+    }
+    @media (max-width: 580px) {
+      .hero-swiper { height: 420px; }
+      .slide-content h2 { font-size: 1.6rem; }
+    }
+    button, a { cursor: pointer; }
+    img { max-width: 100%; }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar">
+  <div class="container nav-flex">
+    <div class="logo">
+      <h2>Word of Hope Evangelical Mission</h2>
+      <span>Grace · Belonging · Purpose</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#ministries">Ministries</a></li>
+      <li><a href="#contact">Connect</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero Carousel (4 slides / pages) -->
+<div id="home" class="hero-swiper swiper">
+  <div class="swiper-wrapper">
+    <!-- Slide 1: Welcome -->
+    <div class="swiper-slide" style="background-image: url('https://picsum.photos/id/104/1600/700');">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <h2>Welcome to Word of Hope</h2>
+        <p>A vibrant community of faith, love, and purpose. You belong here.</p>
+        <a href="#about" class="btn-light">Discover More</a>
+      </div>
+    </div>
+    <!-- Slide 2: Worship -->
+    <div class="swiper-slide" style="background-image: url('https://picsum.photos/id/42/1600/700');">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <h2>Inspiring Worship</h2>
+        <p>Modern worship, deep roots — encounter God in fresh ways every Sunday.</p>
+        <a href="#ministries" class="btn-light">Join Us</a>
+      </div>
+    </div>
+    <!-- Slide 3: Community & Outreach -->
+    <div class="swiper-slide" style="background-image: url('https://picsum.photos/id/77/1600/700');">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <h2>Love in Action</h2>
+        <p>Outreaches, food drives, and community care – we serve the city with joy.</p>
+        <a href="#contact" class="btn-light">Get Involved</a>
+      </div>
+    </div>
+    <!-- Slide 4: Next Generation -->
+    <div class="swiper-slide" style="background-image: url('https://picsum.photos/id/169/1600/700');">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <h2>Next Generation</h2>
+        <p>Youth & kids programs packed with creativity, faith, and friendship.</p>
+        <a href="#ministries" class="btn-light">Learn More</a>
+      </div>
+    </div>
+  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-pagination"></div>
+</div>
+
+<main>
+  <!-- About Section + picture placeholder -->
+  <section id="about">
+    <div class="container">
+      <div class="title-center">
+        <h2 class="section-title title-center">Our Story</h2>
+      </div>
+      <div class="about-flex fade-up">
+        <div class="about-text">
+          <p style="font-size:1.1rem; margin-bottom:1rem;">Word of Hope Evangelical Mission is a modern-day family rooted in timeless truth. We meet in the heart of the city, gathering people from all backgrounds to experience authentic community and life-changing faith.</p>
+          <p>Our mission: to lead people into a growing relationship with Jesus, to love without limits, and to serve our neighborhoods with compassion. Whether you’re just starting to explore faith or looking for a church home, there’s a place for you here.</p>
+        </div>
+        <div class="about-img">
+          <!-- Picture placeholder: replace with actual church image -->
+          <img src="https://picsum.photos/id/111/600/450" alt="Church congregation gathering - placeholder replace with actual photo">
+          <small style="display:block; text-align:center; margin-top: 0.5rem;">📍 Where everybody is somebody!</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ministries / Services section with picture cards -->
+  <section id="ministries">
+    <div class="container">
+      <div class="title-center">
+        <h2 class="section-title title-center">Our Ministries</h2>
+        <p style="margin-top:1rem;">Grow, serve, and connect through our vibrant ministries.</p>
+      </div>
+      <div class="cards-grid">
+        <!-- Card 1 -->
+        <div class="ministry-card fade-up">
+          <img class="card-img" src="https://picsum.photos/id/33/400/280" alt="Worship ministry placeholder">
+          <h3>Worship & Arts</h3>
+          <p>Creative expressions, music teams, and multimedia — use your gifts to lead worship.</p>
+        </div>
+        <!-- Card 2 -->
+        <div class="ministry-card fade-up">
+          <img class="card-img" src="https://picsum.photos/id/145/400/280" alt="Youth Group placeholder">
+          <h3>Youth & Young Adults</h3>
+          <p>Fun, faith-filled gatherings for teens and young adults.</p>
+        </div>
+        <!-- Card 3 -->
+        <div class="ministry-card fade-up">
+          <img class="card-img" src="https://picsum.photos/id/20/400/280" alt="Community outreach placeholder">
+          <h3>Outreach & Missions</h3>
+          <p>Local food pantry, homeless support, and global partnerships.</p>
+        </div>
+        <!-- Card 4 -->
+        <div class="ministry-card fade-up">
+          <img class="card-img" src="https://picsum.photos/id/30/400/280" alt="Kids ministry placeholder">
+          <h3>Kids' Church</h3>
+          <p>Safe, dynamic environment where children discover God's love.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section: Side contact info + messaging form with textarea -->
+  <section id="contact">
+    <div class="container">
+      <div class="title-center">
+        <h2 class="section-title title-center">Connect With Us</h2>
+        <p>Reach out, ask questions, or share prayer requests. We'd love to hear from you.</p>
+      </div>
+      <div class="contact-grid">
+        <!-- Church Contact Side -->
+        <div class="contact-info fade-up">
+          <h3 style="margin-bottom: 1.5rem; color:#124263"><i class="fas fa-church"></i> Visit or Write</h3>
+          <div class="info-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>123 Grace Avenue, Suite 200, Cityville, ST 90210</span>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-phone-alt"></i>
+            <span>+1 (555) 789-2341</span>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-envelope"></i>
+            <span>hello@livinghope.church</span>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-clock"></i>
+            <span>Sunday Services: 9:00am & 11:00am<br>Wed Prayer: 7:00pm</span>
+          </div>
+          <!-- small map placeholder or image, but also picture location -->
+          <div style="margin-top: 1.4rem; border-radius: 1rem; overflow:hidden;">
+            <img src="https://picsum.photos/id/237/500/180" alt="Map placeholder - church location" style="width:100%; height:auto; border-radius: 20px;">
+            <p style="font-size: 0.75rem; margin-top: 6px;">📍 <em>church map/location image</em></p>
+          </div>
+        </div>
+
+        <!-- Contact Form (message with textarea) -->
+        <div class="contact-form fade-up">
+          <h3 style="margin-bottom: 1.2rem;">Send a Message</h3>
+          <form id="churchContactForm">
+            <div class="form-group">
+              <input type="text" id="name" placeholder="Your full name *" required>
+            </div>
+            <div class="form-group">
+              <input type="email" id="email" placeholder="Email address *" required>
+            </div>
+            <div class="form-group">
+              <input type="text" id="subject" placeholder="Subject (e.g., Prayer request, Question)">
+            </div>
+            <div class="form-group">
+              <textarea id="message" rows="5" placeholder="Your message or prayer request *" required style="resize: vertical;"></textarea>
+            </div>
+            <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> Send Message</button>
+            <div id="formFeedback" class="form-message"></div>
+          </form>
+          <p style="margin-top: 1rem; font-size:0.8rem; text-align:center;">* We respond within 48 hours. Your info stays private.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="social-icons">
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+    </div>
+    <p style="margin: 1rem 0 0.5rem;">&copy; 2025 Word of Hope Evangelical Mission – All are welcome. Love God, Love People.</p>
+  </div>
+</footer>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  // Initialize Swiper carousel (4 pages / slides)
+  const swiper = new Swiper('.hero-swiper', {
+    loop: true,
+    autoplay: {
+      delay: 5500,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+      dynamicBullets: true,
+    },
+    effect: 'slide',
+    speed: 800,
+    grabCursor: true,
+  });
+
+  // Contact Form Handler (fully functional front-end demo with success animation)
+  const contactForm = document.getElementById('churchContactForm');
+  const feedbackDiv = document.getElementById('formFeedback');
+
+  contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const subject = document.getElementById('subject').value.trim() || "Church Message";
+    const message = document.getElementById('message').value.trim();
+
+    if (!name || !email || !message) {
+      feedbackDiv.innerHTML = '<span style="color:#c0392b;"><i class="fas fa-exclamation-circle"></i> Please fill in all required fields (name, email, message).</span>';
+      feedbackDiv.style.opacity = '1';
+      setTimeout(() => { feedbackDiv.style.opacity = '0'; setTimeout(()=> feedbackDiv.innerHTML = '', 600); }, 3000);
+      return;
+    }
+    if (!email.includes('@') || !email.includes('.')) {
+      feedbackDiv.innerHTML = '<span style="color:#c0392b;"><i class="fas fa-envelope-open-text"></i> Enter a valid email address.</span>';
+      setTimeout(() => feedbackDiv.innerHTML = '', 3000);
+      return;
+    }
+
+    // Simulate message sending – fully functional demo response, no backend needed; shows success and logs (reflects ability to message church)
+    // In real scenario, replace with API or formspree endpoint, but delivers interactive live messaging simulation.
+    console.log(`Message from ${name} (${email}): ${subject} - ${message}`);
+    
+    feedbackDiv.innerHTML = '<span style="color:#1f7a5a;"><i class="fas fa-check-circle"></i> ✨ Thank you! Your message has been sent. Our church team will reach out soon.</span>';
+    feedbackDiv.style.opacity = '1';
+    // reset form
+    contactForm.reset();
+    
+    // clear success message after 5 seconds
+    setTimeout(() => {
+      if (feedbackDiv) feedbackDiv.style.opacity = '0';
+      setTimeout(() => {
+        if (feedbackDiv) feedbackDiv.innerHTML = '';
+        feedbackDiv.style.opacity = '';
+      }, 500);
+    }, 4800);
+  });
+
+  // Scroll Animation: Intersection Observer for fade-up elements
+  const fadeElements = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+  
+  fadeElements.forEach(el => observer.observe(el));
+  
+  // manual ensure elements already visible if on load
+  window.addEventListener('load', () => {
+    fadeElements.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 100) {
+        el.classList.add('visible');
+        observer.unobserve(el);
+      }
+    });
+  });
+
+  // small hover effect on nav links and smooth anchor scroll
+  document.querySelectorAll('.nav-links a, .btn-light[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if (targetId && targetId !== '#') {
+        e.preventDefault();
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    });
+  });
+</script>
+
+<!-- Remarks for picture replacement: all <img> tags with picsum/photos are marked as placeholder. Additionally carousel background images can be updated with actual church photos. -->
+</body>
+</html>
